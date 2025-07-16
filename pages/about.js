@@ -1,4 +1,3 @@
-// pages/about.js
 import React, { useEffect } from 'react';
 import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
