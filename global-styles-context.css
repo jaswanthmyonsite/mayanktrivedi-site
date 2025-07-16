@@ -1,0 +1,176 @@
+// styles/globals.css
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=EB+Garamond:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand Colors */
+  --color-brand-navy: #0A2540;
+  --color-brand-navy-light: #1E3A5F;
+  --color-brand-teal: #0891B2;
+  --color-brand-teal-light: #06B6D4;
+  --color-brand-walnut: #6B4423;
+  --color-brand-walnut-light: #92603A;
+  --color-brand-orange: #EA580C;
+  --color-brand-orange-light: #FB923C;
+  --color-brand-cream: #FAFAF9;
+  --color-brand-gray-soft: #F5F5F4;
+  
+  /* Typography Scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-brand-cream text-brand-navy font-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.75;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold text-brand-navy;
+    line-height: 1.2;
+  }
+  
+  h1 { @apply text-4xl md:text-5xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+  h5 { @apply text-lg md:text-xl; }
+  h6 { @apply text-base md:text-lg; }
+  
+  /* Focus styles for accessibility */
+  *:focus {
+    outline: 2px solid var(--color-brand-teal);
+    outline-offset: 2px;
+  }
+  
+  /* Skip to main content link */
+  .skip-to-main {
+    @apply absolute left-0 top-0 bg-brand-navy text-white px-4 py-2 transform -translate-y-full;
+    @apply focus:translate-y-0 transition-transform duration-300;
+  }
+}
+
+@layer components {
+  /* Button variants */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-sans font-medium;
+    @apply rounded-md transition-all duration-300 focus:outline-none focus:ring-2;
+    @apply focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-primary {
+    @apply btn bg-brand-navy text-white hover:bg-brand-navy-light;
+    @apply focus:ring-brand-navy;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-brand-teal text-white hover:bg-brand-teal-light;
+    @apply focus:ring-brand-teal;
+  }
+  
+  .btn-tertiary {
+    @apply btn bg-transparent text-brand-navy border-2 border-brand-navy;
+    @apply hover:bg-brand-navy hover:text-white focus:ring-brand-navy;
+  }
+  
+  /* Card component */
+  .card {
+    @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300;
+    @apply border border-gray-100 overflow-hidden;
+  }
+  
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Section spacing */
+  .section {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-navy to-brand-teal bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-slow);
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Print styles */
+  @media print {
+    body {
+      @apply text-black bg-white;
+    }
+    
+    .no-print {
+      display: none !important;
+    }
+    
+    .print-break {
+      page-break-after: always;
+    }
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-brand-navy: #000000;
+    --color-brand-teal: #0066CC;
+    --color-brand-cream: #FFFFFF;
+  }
+}
